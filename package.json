@@ -1,0 +1,16 @@
+{
+  "name": "zyon-cast-pro",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Zyon Cast Pro - PWA instalável com transmissão de tela e microfone via WebRTC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

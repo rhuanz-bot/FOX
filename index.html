@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111318"><meta name="description" content="Zyon Cast Pro: compartilhe tela e microfone em tempo real."><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icons/icon-192.png"><link rel="apple-touch-icon" href="/icons/icon-192.png"><title>Zyon Cast — Comunidade e transmissão</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="guild-rail">
+    <button class="guild-logo active" title="Zyon Cast">Z</button>
+    <div class="rail-sep"></div>
+    <button class="guild-logo game" title="Comunidade">✦</button>
+    <button class="guild-add" title="Adicionar servidor" id="newRoomShortcut">＋</button>
+    <div class="rail-bottom"><span class="rail-dot"></span></div>
+  </aside>
+  <aside class="sidebar">
+    <button class="server-title"><span class="server-emblem">Z</span><span><b>Zyon Cast</b><small>Servidor da comunidade</small></span><span class="chevron">⌄</span></button>
+    <div class="side-scroll">
+      <div class="nav-label">CANAIS DE TEXTO <span>⌄</span></div>
+      <button class="channel"><span>#</span> geral</button>
+      <button class="channel"><span>#</span> comandos</button>
+      <button class="channel"><span>#</span> compartilhar-links</button>
+      <div class="nav-label channel-heading">SALAS DE TRANSMISSÃO <button id="createRoom" title="Nova sala">＋</button></div>
+      <button class="channel room-channel selected" id="roomNav"><span class="sound-wave">◖))</span><span id="navRoomName">sala-zyon</span><i class="live-mini"></i></button>
+      <button class="channel"><span>#</span> sala-livre</button>
+      <div class="nav-label channel-heading">CANAIS DE VOZ <span>⌄</span></div>
+      <button class="channel voice-channel"><span>◖))</span> Lounge <small>1</small></button>
+      <button class="channel voice-channel"><span>◖))</span> Gaming <small>0</small></button>
+      <button class="channel voice-channel"><span>◖))</span> Trabalho <small>0</small></button>
+      <div class="sidebar-tip"><span class="tip-icon">✧</span><b>Transmita em tempo real</b><p>Entre na sala e compartilhe sua tela com outra pessoa.</p></div>
+    </div>
+    <div class="user-panel">
+      <button class="avatar-wrap" id="avatarEdit" title="Alterar foto de perfil"><img id="myAvatar" alt="Sua foto de perfil" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x2='1' y2='1'%3E%3Cstop stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2300c2ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='50' fill='url(%23g)'/%3E%3Ctext x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='Arial'%3EZ%3C/text%3E%3C/svg%3E"><span class="online-ring"></span></button>
+      <div class="user-names"><b id="myName">Zyon</b><small><span class="online-text">●</span> Online</small></div>
+      <button class="user-action" id="userSettings" title="Editar perfil">⚙</button>
+      <input type="file" id="avatarFile" accept="image/*" hidden>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="channel-top">
+      <div class="channel-title"><span class="header-signal">◖))</span><div><b id="topRoomName">sala-zyon</b><small>Transmissão de tela e microfone</small></div></div>
+      <div class="top-actions"><button class="top-icon install-app" id="installAppBtn" title="Instalar Zyon Cast" hidden>↓</button><span class="live-pill"><i></i><span id="liveText">PRONTO</span></span><button class="top-icon" id="copyInvite" title="Copiar convite">⤴</button><button class="top-icon" id="openSettings" title="Configurações">⚙</button></div>
+    </header>
+    <div class="main-scroll">
+      <section class="stream-section">
+        <div class="stream-toolbar"><div class="stream-title"><span class="live-dot"></span><span id="streamHeading">Tela compartilhada</span><span class="quality-pill">HD READY</span></div><div class="stream-toolbar-actions"><span class="latency-pill"><i></i><span id="latency">P2P</span></span><button class="small-icon" id="fullscreenBtn" title="Tela cheia">⛶</button></div></div>
+        <div class="stream-stage" id="streamStage">
+          <video id="remoteVideo" autoplay playsinline></video>
+          <div class="empty-state" id="emptyState"><div class="empty-art"><div class="art-window"><div class="art-bar"><i></i><i></i><i></i></div><div class="art-content"><span></span><span></span><span></span><b>ZYON CAST</b></div></div><div class="art-orbit"></div></div><h2>Seu próximo stream começa aqui</h2><p>Entre na sala e compartilhe uma janela, aba ou monitor.</p><button id="emptyShare" class="accent-btn">▣ &nbsp; Compartilhar tela</button></div>
+          <div class="stage-corner"><span class="corner-dot"></span><span id="stageStatus">AGUARDANDO SINAL</span></div>
+          <button class="stage-source" id="sourceBadge">▣ &nbsp; Tela do participante</button>
+        </div>
+        <div class="stream-meta"><div class="streamer-avatar avatar-animated"><img id="streamerAvatar" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%237c5cff'/%3E%3Ctext x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='Arial'%3EZ%3C/text%3E%3C/svg%3E"><i></i></div><div class="stream-meta-text"><b id="streamerName">Aguardando transmissor</b><small id="streamerSub">A sala está pronta para conectar</small></div><div class="meta-spacer"></div><button class="meta-button" id="copyCode">Código: <b id="codeLabel">ZYON24</b> <span>▣</span></button></div>
+      </section>
+      <section class="bottom-grid">
+        <div class="participants-card">
+          <div class="section-head"><div><h3>Na chamada</h3><span class="count" id="participantCount">1</span></div><span class="muted-label">ANIMAÇÃO DE PERFIL</span></div>
+          <div class="participant-list" id="participantList">
+            <div class="participant"><div class="participant-avatar avatar-animated"><img id="selfParticipantAvatar" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%237c5cff'/%3E%3Ctext x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='Arial'%3EZ%3C/text%3E%3C/svg%3E"><i></i></div><div class="participant-info"><b id="selfParticipantName">Zyon <span class="you-tag">VOCÊ</span></b><small id="selfParticipantState">Online · pronto</small></div><span class="mic-state" id="selfMicState">♩</span></div>
+            <div class="participant" id="peerParticipant" hidden><div class="participant-avatar avatar-animated"><img id="peerAvatar" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%2300bfa6'/%3E%3Ctext x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='Arial'%3EP%3C/text%3E%3C/svg%3E"><i></i></div><div class="participant-info"><b id="peerName">Participante</b><small id="peerState">Conectando…</small></div><span class="mic-state">♩</span></div>
+          </div>
+          <div class="participant-hint"><span>✦</span> Clique na sua foto para personalizar o perfil.</div>
+        </div>
+        <div class="connect-card">
+          <div class="section-head"><h3>Conexão</h3><span class="secure-tag"><i></i> WEBRTC</span></div>
+          <div class="connection-row"><span>Qualidade</span><b id="qualityValue">Aguardando</b></div><div class="meter"><span id="qualityMeter"></span></div>
+          <div class="connection-row"><span>Transporte</span><b id="transportValue">P2P · ICE</b></div>
+          <div class="connection-row"><span>Áudio</span><b id="audioValue">Opus quando negociado</b></div>
+          <div class="connection-row"><span>Vídeo</span><b id="videoValue">Adaptativo</b></div>
+          <p class="connect-note" id="connectionText">Entre na sala para iniciar uma sessão.</p>
+        </div>
+      </section>
+    </div>
+    <div class="call-dock">
+      <div class="dock-room"><span class="dock-wave">◖))</span><div><b id="dockRoom">sala-zyon</b><small id="dockStatus">Não conectado</small></div></div>
+      <div class="dock-controls"><button id="micBtn" class="dock-btn" disabled title="Silenciar microfone">♩<span class="control-tooltip">Microfone</span></button><button id="shareBtn" class="dock-btn share-control" disabled title="Compartilhar tela">▣<span class="control-tooltip">Compartilhar tela</span></button><button id="joinBtn" class="dock-btn join-control" title="Entrar na sala">↗<span class="control-tooltip">Entrar na sala</span></button><button id="leaveBtn" class="dock-btn hangup" disabled title="Sair da sala">☎<span class="control-tooltip">Desconectar</span></button></div>
+      <button id="editNameBtn" class="dock-more" title="Editar nome">⋯</button>
+    </div>
+  </main>
+</div>
+<div class="modal-backdrop" id="roomModal" hidden><div class="modal"><button class="modal-close" data-close="roomModal">×</button><span class="modal-kicker">ZYON CAST / SALAS</span><h2>Entrar em uma sala</h2><p>O primeiro participante transmite; o segundo assiste.</p><label for="roomCode">CÓDIGO DA SALA</label><div class="room-field"><input id="roomCode" maxlength="12" value="ZYON24" autocomplete="off"><button id="randomBtn" class="secondary-btn">Gerar</button></div><button id="modalJoinBtn" class="accent-btn full-btn">Entrar na sala <span>↗</span></button><div class="modal-foot">A captura de tela e o microfone só começam após sua ação.</div></div></div>
+<div class="modal-backdrop" id="profileModal" hidden><div class="modal"><button class="modal-close" data-close="profileModal">×</button><span class="modal-kicker">PERSONALIZAÇÃO</span><h2>Seu perfil</h2><p>Defina o nome e escolha uma foto de perfil.</p><div class="profile-edit-row"><button class="profile-preview avatar-animated" id="profilePhotoBtn"><img id="profilePreview" alt="Prévia da foto" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='50' fill='%237c5cff'/%3E%3Ctext x='50' y='65' font-size='48' text-anchor='middle' fill='white' font-family='Arial'%3EZ%3C/text%3E%3C/svg%3E"><i></i></button><span><b>Foto de perfil</b><small>GIF animado ou imagem estática</small></span></div><label for="profileName">NOME DE EXIBIÇÃO</label><input id="profileName" class="modal-input" maxlength="24" value="Zyon"><button id="saveProfile" class="accent-btn full-btn">Salvar perfil</button></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="/app.js"></script><script src="/pwa.js"></script>
+</body></html>
